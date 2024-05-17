@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>F28IR Coursework</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Get Top 10 Songs</h1>
+    <form id="artist-form">
+        <label for="artist">Enter artist name:</label>
+        <input type="text" id="artist" name="artist" required>
+        <br>
+        <label for="market">Enter market:</label>
+        <input type="text" id="market" name="market">
+        <br><br>
+        <input type="submit" value="Get Songs">
+    </form>
+
+    <div id="result-container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#artist-form").submit(function (event) {
+                event.preventDefault();
+
+                const artistName = $("#artist").val();
+                let market = $("#market").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/get_top_songs",
+                    data: {artist: artistName, market: market},
+                    success: function (data) {
+                        $("#result-container").html(data);
+                    },
+                    error: function () {
+                        $("#result-container").html("<p>Enter an artist</p>");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

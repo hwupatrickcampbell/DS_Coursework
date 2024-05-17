@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<h1>Top 10 Songs</h1>
+    <ol>
+        {% for song in songs %}
+            <li><a href="{{ song.external_urls.spotify }}" target="_blank">{{ song.name }}</a></li>
+        {% endfor %}
+    </ol>
+	<br><br>
+	<h3>inputs</h3>
+</body>
+</html>
