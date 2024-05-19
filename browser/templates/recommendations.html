@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Music Recommendations</title>
+  </head>
+  <body>
+    <h1>Recommended Tracks</h1>
+    <ul>
+      {% for track in recommendations %}
+		<li><a href="{{ track.external_urls.spotify }}" target="_blank">{{ track['name'] }} by {{ track['artists'][0]['name'] }}</a></li>
+      {% endfor %}
+    </ul>
+    <a href="/">Go Back</a>
+  </body>
+</html>

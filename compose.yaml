@@ -1,12 +1,13 @@
 version: '3.9'
 services:
-    web-app:
-        build: .
+    app1:
+        restart: always
+        build: ./top_songs_app
         ports:
             - "5000:5000"
-    mysqldb:
-        image: mysql:latest
+        
+    app2:
+        restart: always
+        build: ./browser
         ports:
-            - 3307:3306
-        environment:
-            - MYSQL_ROOT_PASSWORD=p@ssword1
+            - "3000:5000"

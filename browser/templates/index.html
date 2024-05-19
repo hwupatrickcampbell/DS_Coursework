@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Discover Music</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <h1>Discover New Music</h1>
+    <form id="recommendations-form">
+      <label for="artist">Seed Artist:</label>
+      <input type="text" id="artist" name="artist"><br><br>
+      <label for="track">Seed Track:</label>
+      <input type="text" id="track" name="track"><br><br>
+      <input type="submit" value="Get Recommendations">
+    </form>
+	
+	<div id="result-container"></div>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#recommendations-form").submit(function (event) {
+                event.preventDefault();
+
+                const artistName = $("#artist").val();
+                let track = $("#track").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/recommendations",
+                    data: {artist: artistName, track: track},
+                    success: function (data) {
+                        $("#result-container").html(data);
+                    },
+                    error: function () {
+                        $("#result-container").html("<p>Enter an artist</p>");
+                    }
+                });
+            });
+        });
+    </script>
+  </body>
+</html>

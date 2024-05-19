@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, jsonify
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import requests
-import json
-import mysql.connector
 
 cid = "4607d4d6a2eb461b82bc4acc0cbbe252"
 secret = "213a8a1f76ca4929aebf235fa8cb8c89"
@@ -44,28 +42,5 @@ def get_top_songs():
 
     return render_template('top_songs.html', name=artist['name'], songs=top_songs)
 
-@app.route('/initdb')
-def db_init():
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="p@ssword1"
-    )
-    cursor = mydb.cursor()
-
-    cursor.execute("CREATE DATABASE IF NOT EXISTS inputs")
-    cursor.execute("USE inputs")
-
-    cursor.execute("CREATE TABLE IF NOT EXISTS searches (artist VARCHAR(255), market VARCHAR(10))")
-    cursor.execute("INSERT INTO searches VALUES ('Ed Sheeran', 'US')")
-    
-    cursor.execute("SELECT * FROM searches")
-    result = "<h3>inputs</h3>"
-    for row in cursor.fetchall():
-        result += row[0]+" - "+row[1]+"<br>"
-
-    cursor.close()
-    return result
-
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=True, port=5000)
