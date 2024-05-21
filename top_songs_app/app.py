@@ -43,4 +43,4 @@ def get_top_songs():
     return render_template('top_songs.html', name=artist['name'], songs=top_songs)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=80)

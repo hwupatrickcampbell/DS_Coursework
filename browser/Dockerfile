@@ -1,6 +1,6 @@
 FROM python:3.11-slim
-EXPOSE 3000
-EXPOSE 5000
+EXPOSE 443
+EXPOSE 80
 WORKDIR /app
 COPY . /app
 COPY requirements.txt .

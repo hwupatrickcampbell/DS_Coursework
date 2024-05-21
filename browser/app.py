@@ -41,4 +41,4 @@ def recommendations():
     return render_template('recommendations.html', recommendations=recommendations['tracks'])
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=True, port=443)
